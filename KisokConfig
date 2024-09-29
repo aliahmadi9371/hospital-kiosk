@@ -1,0 +1,22 @@
+1) edit /etc/rc.local file and save it
+        su -l <user> -c startx &
+2) edit /etc/X11/Xwrapper.config (install xserver-xorg-legacy)
+        add:    allowed_users=anybody
+        add:     needs_root_rights=yes
+3) create  (every name)run.sh
+        until  /AppPath; do
+                sleep 0.1
+        done
+4) sudo chmod +x run.sh
+5) (create)edit ~/.xinitrc and save it
+        #Disable dpms to prevent screen from blanking
+        xset -dpms; xset s off
+
+        exec matchbox-window-manager -use_titlebar no -use_cursor no &
+
+        /path/to/run.sh
+6) sudo systemctl stop(disable) nodm(lightdm,...).service
+7) startx
+8) reboot
+
+          
